@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <malloc.h>
 
 using namespace std;
 
@@ -224,63 +225,44 @@ class OrderLinkedList {
 };
 
 int main() {
-    ProductList productsList;
-    productsList.addProduct("Bread", 10);
-    productsList.addProduct("Milk", 20);
-    productsList.addProduct("Cheese", 30);
-    productsList.addProduct("Apple", 40);
-
-    productsList.addProduct("Egg", 50);
-    productsList.removeProduct(5);
-
+	int menu;
+	ProductList productsList;
+	do{
+    cout << "==== Toko Elektronik ====" << endl;
+    cout << "1.Input Produk" << endl;
+    cout << "2.Hapus Produk" << endl;
+    cout << "3.List Produk" << endl;
+    cout << "4.Input Order" << endl;
+    cout << "5.Proses Order" << endl;
+    cout << "6.Kirim Order" << endl;
+    cout << "7.Lihat Riwayat Order" << endl;
+    cout <<"8.Exit" << endl;
+    cout << "Silahkan Pilih Menu : " << endl; cin>>menu;
+    cout <<endl;
+    
+    if(menu == 1){
+	
+		int jumlah;
+		int i;
+		cout << "Silahkan Masukkan jumlah input : " <<endl; cin>>jumlah;
+		for(i=1; i<=jumlah; i++)
+		{
+			string name;
+			int price;
+			cout << "Nama barang : " ; cin>>name;
+			cout <<endl;
+			cout << "Harga BarangL "; cin>>price;
+    productsList.addProduct(name, price);
+   }
+}else if(menu == 2){
+	int id;
+	cout << "Silahkan Masukkan Produk yang ingin dihapus : "; cin>>id;
+	cout <<endl;
+    productsList.removeProduct(id);
+}else if(menu == 3){
     cout << "List Semua Produk" << endl;
     productsList.printList();
     cout << endl;
-
-    OrderQueue orderQueue;
-    NodeProduct product = productsList.getProduct(1);
-    orderQueue.enqueue(product);
-    product = productsList.getProduct(2);
-    orderQueue.enqueue(product);
-    product = productsList.getProduct(3);
-    orderQueue.enqueue(product);
-    product = productsList.getProduct(4);
-    orderQueue.enqueue(product);
-
-    cout << "List Input Pemesanan" << endl;
-    orderQueue.printList();
-    cout << endl;
-
-    OrderStack shipmentStack;
-    NodeOrder order = orderQueue.dequeue();
-    shipmentStack.push(&order);
-    NodeOrder order1 = orderQueue.dequeue();
-    shipmentStack.push(&order1);
-    NodeOrder order2 = orderQueue.dequeue();
-    shipmentStack.push(&order2);
-
-    cout << "List Pesanan yang sudah di proses" << endl;
-    shipmentStack.printList();
-    cout << endl;
-
-    cout << "List Pesanan yang belum di proses" << endl;
-    orderQueue.printList();
-    cout << endl;
-
-    OrderLinkedList historyOrder;
-
-    NodeOrder order3 = shipmentStack.pop();
-    historyOrder.addOrder(&order3);
-    NodeOrder order4 = shipmentStack.pop();
-    historyOrder.addOrder(&order4);
-
-    cout << "List Pesanan yang belum dikirim" << endl;
-    shipmentStack.printList();
-    cout << endl;
-
-    cout << "List Pesanan yang sudah dikirim dan masuk ke riwayat order" << endl;
-    historyOrder.printList();
-    cout << endl;
-
-    return 0;
+}
+}while(menu !=8);
 }
